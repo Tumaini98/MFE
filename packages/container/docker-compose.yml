@@ -1,0 +1,20 @@
+version: "3"
+
+services:
+  residentcare-frontend:
+    image: ukiru/mfp:latest
+    container_name: MFP-frontend
+    ports:
+      - "80:80"
+    restart: always
+
+  watchtower-frontend:
+    image: containrrr/watchtower
+    container_name: watchtower-frontend
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      - WATCHTOWER_POLL_INTERVAL=5
+    restart: always
+
+    # when you push new image it replaces current container with the latest
